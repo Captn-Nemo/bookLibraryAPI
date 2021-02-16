@@ -5,8 +5,9 @@ const httpCodes = {
   OK: 200
 };
 
-const handleError = (err, res) => {
-  const { statusCode, message } = err;
+const handleError = (errorvar, res) => {
+  const { statusCode, message } = errorvar;
+
   res.status(statusCode).json({
     status: "error",
     statusCode,

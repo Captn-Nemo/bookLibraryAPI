@@ -6,7 +6,7 @@ module.exports = function(router) {
   router.get(URI + "getallbooks", bookController.getAllBooks);
 
   //Get the details of single Book by id
-  router.get(URI + "getBookDetails/:id", bookController.getSingleBook);
+  router.get(URI + "getbookdetails/:id", bookController.getSingleBook);
 
   //Add a Book
   router.post(URI + "insert", bookController.insertBook);

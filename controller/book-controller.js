@@ -1,11 +1,20 @@
-const db = require("../config/db.controller");
+/* 
+All the service functions for the apis are written in this file
+*/
+
+const db = require("../service/book.services");
 const httpCodes = { NOT_FOUND: 404, BAD_REQUEST: 400, SERVER_ERROR: 500 };
+
 const {
   handleError,
   errorList,
   successList,
   handleSuccess
 } = require("../utils/errors");
+
+/* 
+  /api/getallbooks
+*/
 exports.getAllBooks = (req, res) => {
   var criteria = {};
   db.getallBooks(criteria, (err, docs) => {
@@ -19,6 +28,9 @@ exports.getAllBooks = (req, res) => {
   });
 };
 
+/* 
+  /api/getbookdetails/id
+*/
 exports.getSingleBook = (req, res) => {
   db.getBookDetails({ _id: req.params.id }, (err, docs) => {
     if (docs == undefined) {
@@ -31,6 +43,9 @@ exports.getSingleBook = (req, res) => {
   });
 };
 
+/* 
+  /api/insert
+*/
 exports.insertBook = (req, res) => {
   var data = req.body;
   db.insert(data, (err, docs) => {
@@ -47,6 +62,9 @@ exports.insertBook = (req, res) => {
   });
 };
 
+/* 
+  /api/update/id
+*/
 exports.updateBook = (req, res) => {
   var data = req.body;
   if (req.body.name || req.body.author) {
@@ -64,9 +82,13 @@ exports.updateBook = (req, res) => {
   }
 };
 
+/* 
+  /api/delete/id
+*/
 exports.deleteBook = (req, res) => {
   // var criteria = {};
   db.delete({ _id: req.params.id }, (err, docs) => {
+    console.log(err);
     if (err) {
       res.status(httpCodes.BAD_REQUEST);
       res.send(err);

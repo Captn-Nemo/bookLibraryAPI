@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-const { handleError } = require("./utils/errors");
 
 require("./routes/book.routes")(router);
 
